@@ -1,12 +1,12 @@
-use std::{env};
 use actix_web::{middleware, web, App, HttpServer};
+use env_logger:: Env;
 
 mod base;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
-    env_logger::init();
+    // env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
+    env_logger::init_from_env(Env::default().default_filter_or("info"));
 
     HttpServer::new(|| {
         App::new()
